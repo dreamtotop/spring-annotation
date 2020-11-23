@@ -1,9 +1,11 @@
 package org.top.conf;
 
+import org.springframework.beans.factory.FactoryBean;
 import org.springframework.context.annotation.*;
 import org.springframework.stereotype.Controller;
 import org.top.bean.Book;
 import org.top.bean.Person;
+import org.top.bean.StudentFactoryBean;
 import org.top.condition.LinuxCondition;
 import org.top.condition.WindowsCondition;
 
@@ -11,7 +13,7 @@ import org.top.condition.WindowsCondition;
 @ComponentScan(value = "org.top", excludeFilters = {
         @ComponentScan.Filter(type = FilterType.ANNOTATION, classes = {Controller.class})
 })
-@Import({Book.class})
+@Import({Book.class, MyImportBeanDefinitionRegistrar.class, MyImportSelector.class})
 public class BeanConfiguration {
 
     // 给容器注册对象，类型为返回值类型， id默认为方法名(属性value(name)可以指定id)
@@ -51,4 +53,11 @@ public class BeanConfiguration {
     public Person Linus(){
         return new Person("利纳斯",48);
     }
+
+    // 创建通过FactoryBean注入bean
+    @Bean
+    public FactoryBean factoryBean(){
+        return new StudentFactoryBean();
+    }
+
 }

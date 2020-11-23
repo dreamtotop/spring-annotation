@@ -66,14 +66,31 @@ public class MainTest {
 
 
         /**
+         *  @Bean("bill")
+         *     @Conditional({WindowsCondition.class})
+         *
          * @Conditional : 按照一定的条件进行判断，满足条件后向容器中注册Bean
          * 该注解可以使用在方法上，也可以使用在类上
          */
 
 
 
+        // ******* 测试 FactoryBean ****************  //
+        /**
+         *  通过FactoryBean来向容器中注册Bean
+         */
+        Object bean = annotationContext.getBean("factoryBean");
+        System.out.println(bean.getClass());
+        //获取工厂Bean本身(增加前缀)
+        Object factory = annotationContext.getBean("&factoryBean");
+        System.out.println(factory.getClass());
+
+
         // *******       测试包扫描@ComponentScan注解   ************** //
         /**
+         * @ComponentScan(value = "org.top", excludeFilters = {
+         *         @ComponentScan.Filter(type = FilterType.ANNOTATION, classes = {Controller.class})
+         * })
          * 1. value : 指定要扫描的包
          * 2. excludeFilters  ： 扫描按照指定的规则排除组件
          * 3. includeFilters  ： 扫描按照规则只需要那些组件
@@ -84,9 +101,9 @@ public class MainTest {
          *  -- FilterType.CUSTOM  根据自定义规则
          */
         // 获取所有的注册组件
-        String[] names = annotationContext.getBeanDefinitionNames();
-        for(String name : names){
-            System.out.println(name);
-        }
+//        String[] names = annotationContext.getBeanDefinitionNames();
+//        for(String name : names){
+//            System.out.println(name);
+//        }
     }
 }
