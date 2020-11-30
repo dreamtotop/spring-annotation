@@ -6,8 +6,10 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.FilterType;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.stereotype.Controller;
+import org.top.bean.Car;
 import org.top.bean.Person;
 import org.top.conf.BeanConfiguration;
+import org.top.conf.BeanLifeCycle;
 
 
 //@ComponentScan(value = "org.top", excludeFilters = {
@@ -105,5 +107,21 @@ public class MainTest {
 //        for(String name : names){
 //            System.out.println(name);
 //        }
+
+
+
+        // ****************       对象的生命周期  *********************** ///
+        System.out.println();
+        ApplicationContext applicationContext = new AnnotationConfigApplicationContext(BeanLifeCycle.class);
+        // 验证无参构造器
+        Car car = (Car)applicationContext.getBean("car1");
+        System.out.println(car);
+        // 验证有参构造器
+        Car car1 = (Car) applicationContext.getBean("car2");
+        System.out.println(car1);
+
+        // 关闭容器时销毁Bean
+
+
     }
 }
