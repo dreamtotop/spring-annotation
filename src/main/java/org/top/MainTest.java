@@ -7,6 +7,7 @@ import org.springframework.context.annotation.FilterType;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.stereotype.Controller;
 import org.top.bean.Car;
+import org.top.bean.Dog;
 import org.top.bean.Person;
 import org.top.conf.BeanConfiguration;
 import org.top.conf.BeanLifeCycle;
@@ -27,7 +28,7 @@ public class MainTest {
         Person getPersonById = (Person) context.getBean("person");
         System.out.println(getPersonById);
 
-        // 根据类型来获取
+        // 根据类型来获取，如果容器中存在多个同类型的实例，则会报错。
         Person getPersonByType = (Person) context.getBean(Person.class);
         System.out.println(getPersonByType);
         System.out.println();
@@ -121,6 +122,12 @@ public class MainTest {
         System.out.println(car1);
 
         // 关闭容器时销毁Bean
+
+
+        // 测试BeanPostProcessor
+//        ApplicationContext applicationContext = new AnnotationConfigApplicationContext(BeanLifeCycle.class);
+//        Dog dog = (Dog) applicationContext.getBean("dog");
+
 
 
     }

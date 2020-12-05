@@ -4,6 +4,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Scope;
 import org.top.bean.Car;
+import org.top.bean.Dog;
 
 @Configuration
 public class BeanLifeCycle {
@@ -24,4 +25,9 @@ public class BeanLifeCycle {
     public Car car2(){
         return new Car("benz");
     }
+
+//    @Bean
+//    public Dog dog(){
+//        return new Dog();
+//    }
 }
